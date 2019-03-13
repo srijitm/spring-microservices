@@ -8,11 +8,12 @@ The project comes with individual Dockerfiles per service and a docker-compose c
  >From 18.03 onwards our recommendation is to connect to the special DNS name host.docker.internal, which resolves to the internal IP address used by the host.
 
 See: <https://docs.docker.com/docker-for-mac/networking/>
+
 *Make sure to update the DNS name if not working on a Mac*
 
 ## Localhost Instructions
 
-* Of course you need jdk, maven etc. installed prior to this *
+*Of course you need jdk, maven etc. installed prior to this*
 
 1. `cd ./spring-microservices`
 2. `mvn clean install`
