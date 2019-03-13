@@ -4,7 +4,7 @@ server:
 eureka:  
   client:
     serviceUrl:
-      defaultZone: ${DISCOVERY_URL:http://docker.for.mac.localhost:8761}/eureka/
+      defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
     healthcheck:
       enabled: true
   instance:

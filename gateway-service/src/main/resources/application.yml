@@ -19,6 +19,16 @@ zuul:
       path: /customer/**
       serviceId: customer-service
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 200000
+  
+
 ribbon:
   eureka:
     enabled: true
@@ -28,7 +38,7 @@ ribbon:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${DISCOVERY_URL:http://docker.for.mac.localhost:8761}/eureka/
+      defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
     registerWithEureka: false
       
 server:
