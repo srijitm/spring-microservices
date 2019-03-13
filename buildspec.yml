@@ -18,7 +18,7 @@ phases:
       - mvn -q clean install
       - echo Building the Account Service Docker image...
       - cd $CODEBUILD_SRC_DIR/account-service
-      - docker build -t $ACCOUNT_ROOT_REPOSITORY_URI/account-service:latest .
+      - docker build -t $ECR_REPO_ROOT/account-service:latest .
       - docker tag $ECR_REPO_ROOT/account-service:latest $ECR_REPO_ROOT/account-service:$IMAGE_TAG
       - echo Building the Customer Service Docker image...
       - cd $CODEBUILD_SRC_DIR/customer-service
