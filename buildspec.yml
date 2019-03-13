@@ -1,0 +1,37 @@
+version: 0.2
+
+env:
+  variables:
+    ECR_REPO_ROOT:
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean install
+      - echo Building the Account Service Docker image...
+      - cd $CODEBUILD_SRC_DIR/account-service
+      - docker build -t $ACCOUNT_ROOT_REPOSITORY_URI/account-service:latest .
+      - docker tag $ECR_REPO_ROOT/account-service:latest $ECR_REPO_ROOT/account-service:$IMAGE_TAG
+      - echo Building the Customer Service Docker image...
+      - cd $CODEBUILD_SRC_DIR/customer-service
+      - docker build -t $ECR_REPO_ROOT/customer-service:latest .
+      - docker tag $ECR_REPO_ROOT/customer-service:latest $ECR_REPO_ROOT/customer-service:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Account Service Docker image...
+      - cd $CODEBUILD_SRC_DIR/account-service
+      - docker push $ECR_REPO_ROOT/account-service:latest
+      - docker push $ECR_REPO_ROOT/account-service:$IMAGE_TAG
+      - echo Pushing the Customer Service Docker image...
+      - cd $CODEBUILD_SRC_DIR/account-service
+      - docker push $ECR_REPO_ROOT/customer-service:latest
+      - docker push $ECR_REPO_ROOT/customer-service:$IMAGE_TAG
