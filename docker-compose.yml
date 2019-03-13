@@ -1,0 +1,21 @@
+version: '3'
+services:
+  discovery-service:
+    build: ./discovery-service
+    ports:
+      - "8761:8761"
+  account-service:
+    build: ./account-service
+    depends_on:
+      - discovery-service
+  customer-service:
+    build: ./customer-service
+    depends_on:
+      - discovery-service
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "8765:8765"
+    depends_on: 
+      - account-service
+      - customer-service
