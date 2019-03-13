@@ -8,7 +8,6 @@ The project comes with individual Dockerfiles per service and a docker-compose c
  >From 18.03 onwards our recommendation is to connect to the special DNS name host.docker.internal, which resolves to the internal IP address used by the host.
 
 See: <https://docs.docker.com/docker-for-mac/networking/>
-
 *Make sure to update the DNS name if not working on a Mac*
 
 ## Localhost Instructions
@@ -26,6 +25,6 @@ See: <https://docs.docker.com/docker-for-mac/networking/>
 ## AWS Instructions
 
 ToDo: Cfn for setting up CodeBuild, ECR Repos and IAM permissions.
-
 Done:
+
 - buildspec.yml added for CodeBuild
