@@ -17,6 +17,7 @@ eureka:
       defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
     healthcheck:
       enabled: true
+    fetchRegistry: true
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2

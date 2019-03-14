@@ -27,7 +27,6 @@ hystrix:
           strategy: THREAD
           thread:
             timeoutInMilliseconds: 200000
-  
 
 ribbon:
   eureka:
@@ -40,7 +39,7 @@ eureka:
     serviceUrl:
       defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
     registerWithEureka: false
-      
+    fetchRegistry: true
 server:
   port: 8765
 
