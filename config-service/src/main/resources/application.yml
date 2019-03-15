@@ -4,13 +4,13 @@ server:
 spring:
   application:
     name: config-service
-  profiles:
-    active: native
   cloud:
     config:
       server:
         git:
-          uri: ${USER.HOME}/ws/java/spring-microservices
-          basedir: configs
+          uri: https://github.com/srijitm/spring-microservices
+          default-label: develop
+          searchPaths: configs/{application}
         native:
           search-locations: /Users/srijit/ws/java/spring-microservices/configs/{application}
+      
