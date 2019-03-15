@@ -1,0 +1,16 @@
+server:  
+  port: ${PORT:8769}
+    
+spring:
+  application:
+    name: config-service
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${USER.HOME}/ws/java/spring-microservices
+          basedir: configs
+        native:
+          search-locations: /Users/srijit/ws/java/spring-microservices/configs/{application}

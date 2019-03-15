@@ -17,3 +17,9 @@ ribbon:
     enabled: true
   eager-load:
     enabled: true
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
