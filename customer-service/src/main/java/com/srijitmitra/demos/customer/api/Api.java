@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,7 @@ import com.srijitmitra.demos.customer.model.Customer;
 import com.srijitmitra.demos.customer.model.CustomerType;
 
 @RestController
+@RefreshScope
 public class Api {
 	
 	@Autowired
@@ -54,4 +57,12 @@ public class Api {
 		return customer;
 	}
 	
+	@Value("${provider}")
+	private String provider = "empty";
+
+	@RequestMapping("/customers/configtest")
+	public String configTest() {
+		return "This property loaded from " + provider;
+	}
+
 }

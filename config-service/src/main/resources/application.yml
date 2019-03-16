@@ -1,6 +1,17 @@
 server:  
-  port: ${PORT:8080}
-
+  port: ${PORT:8769}
+    
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/srijitm/spring-microservices
+          default-label: develop
+          searchPaths: configs/{application}
+      
 eureka:  
   client:
     serviceUrl:
