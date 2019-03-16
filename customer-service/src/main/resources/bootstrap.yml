@@ -5,7 +5,10 @@ spring:
     active: dev
   cloud:
     config:
-      uri: http://host.docker.internal:8769
+      discovery:
+        serviceId: config-service
+        enabled: true
+      #uri: http://host.docker.internal:8769
       failFast: true
   logging:
     pattern:
@@ -13,3 +16,8 @@ spring:
     level:
       org.springframework: WARN
       org.hibernate: WARN    
+
+eureka:  
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
