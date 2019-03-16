@@ -1,31 +1,47 @@
 version: '3'
 services:
+  startup-dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - discovery-service
+      - config-service 
+      - gateway-service
+    command: discovery-service:8761 config-service:8769 gateway-service:8765
+
   discovery-service:
     build: ./discovery-service
     ports:
       - "8761:8761"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8761"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+
   config-service:
     build: ./config-service
     ports:
       - "8769:8769"
     depends_on:
       - discovery-service
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8769/test/test"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+
   account-service:
     build: ./account-service
     ports:
       - "23001"
-    depends_on:
-      - config-service
+
   customer-service:
     build: ./customer-service
     ports:
       - "23002"
-    depends_on:
-      - config-service
+
   gateway-service:
     build: ./gateway-service
     ports:
       - "8765:8765"
-    depends_on: 
-      - account-service
-      - customer-service
+

@@ -17,7 +17,8 @@ See: <https://docs.docker.com/docker-for-mac/networking/>
 1. `cd ./spring-microservices`
 2. `mvn clean install`
 3. `docker-compose build`
-4. `docker-compose up`
+4. `docker-compose run --rm startup-dependencies`
+4. `docker-compose up account-service customer-service`
 5. Browse to <http://localhost:8761/> to validate Eureka is up and services have registered.
 6. `curl <http://localhost:8765/api/customer/customers>` to hit the Zuul endpoint.
 7. `docker-compose scale account-service=2 customer-service=2` to scale the services up. Check Eureka to see if they have registered. Hit the API endpoint again and monitor logs to see the calls are being load balanced to both instances of account and customer services.
@@ -25,6 +26,7 @@ See: <https://docs.docker.com/docker-for-mac/networking/>
 ## AWS Instructions
 
 ToDo: Cfn for setting up CodeBuild, ECR Repos and IAM permissions.
-Done:
 
+Done:
 - buildspec.yml added for CodeBuild
+- 
