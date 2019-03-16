@@ -4,18 +4,24 @@ services:
     build: ./discovery-service
     ports:
       - "8761:8761"
+  config-service:
+    build: ./config-service
+    ports:
+      - "8769:8769"
+    depends_on:
+      - discovery-service
   account-service:
     build: ./account-service
     ports:
       - "23001"
     depends_on:
-      - discovery-service
+      - config-service
   customer-service:
     build: ./customer-service
     ports:
       - "23002"
     depends_on:
-      - discovery-service
+      - config-service
   gateway-service:
     build: ./gateway-service
     ports:
