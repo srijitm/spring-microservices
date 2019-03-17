@@ -3,21 +3,35 @@ spring:
     name: account-service
   profiles:
     active: dev
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${springAppName:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    org.springframework: WARN
+    org.hibernate: WARN    
+eureka:  
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
+
+---
+
+spring:  
+  profiles: dev
   cloud:
     config:
       discovery:
         serviceId: config-service
         enabled: true
-      #uri: http://host.docker.internal:8769
       failFast: true
-  logging:
-    pattern:
-      console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${springAppName:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
-    level:
-      org.springframework: WARN
-      org.hibernate: WARN    
 
-eureka:  
-  client:
-    serviceUrl:
-      defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
+
+---
+
+spring:  
+  profiles: aws
+  aws:
+    paramstore:
+      prefix: /spring_config/
+      enabled: true
+      failFast: true
