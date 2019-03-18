@@ -30,18 +30,22 @@ services:
         timeout: 10s
         retries: 5
 
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "8765:8765"
+
   account-service:
     build: ./account-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
     ports:
       - "23001"
 
   customer-service:
     build: ./customer-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=aws
     ports:
       - "23002"
-
-  gateway-service:
-    build: ./gateway-service
-    ports:
-      - "8765:8765"
 

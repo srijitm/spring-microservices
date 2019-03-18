@@ -30,8 +30,9 @@ spring:
 
 spring:  
   profiles: aws
-  aws:
-    paramstore:
-      prefix: /spring_config/
-      enabled: true
+  cloud:
+    config:
+      discovery:
+        serviceId: config-service
+        enabled: true
       failFast: true
