@@ -38,14 +38,14 @@ services:
   account-service:
     build: ./account-service
     environment:
-      - "SPRING_PROFILES_ACTIVE=dev"
+      - SPRING_PROFILES_ACTIVE=dev
     ports:
       - "23001"
 
   customer-service:
     build: ./customer-service
     environment:
-      - SPRING_PROFILES_ACTIVE=aws
+      - SPRING_PROFILES_ACTIVE=dev
     ports:
       - "23002"
 

@@ -1,3 +1,13 @@
 spring:
   application:
-    name: gateway-server
+    name: gateway-service
+  profiles:
+    active: dev
+
+---
+spring:  
+  profiles: dev
+  cloud:
+    config:
+      uri: ${SPRING_CONFIG_URI:http://host.docker.internal:8769}
+      failFast: true

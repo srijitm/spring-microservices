@@ -28,22 +28,3 @@ hystrix:
           thread:
             timeoutInMilliseconds: 200000
 
-ribbon:
-  eureka:
-    enabled: true
-  ReadTimeout: 60000
-  ConnectTimeout: 20000
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${DISCOVERY_URL:http://host.docker.internal:8761}/eureka/
-    registerWithEureka: false
-    fetchRegistry: true
-server:
-  port: 8765
-
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG

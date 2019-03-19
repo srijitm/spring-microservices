@@ -1,5 +1,5 @@
 server:  
-  port: ${PORT:8080}
+  port: ${PORT:8765}
 
 eureka:  
   client:
@@ -17,6 +17,8 @@ ribbon:
     enabled: true
   eager-load:
     enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 20000
 
 spring:
   cloud:
